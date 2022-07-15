@@ -11,7 +11,10 @@ public class Enemy : MonoBehaviour
     public enum AIState
     {
         Idle,
-        Dead
+        Dead,
+        Attack,
+        MoveTowardsPlayer,
+        Special
     }
     
     // Start is called before the first frame update
