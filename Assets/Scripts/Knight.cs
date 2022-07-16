@@ -13,8 +13,8 @@ public class Knight : Enemy
         damage = 20;
     }
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
 }
