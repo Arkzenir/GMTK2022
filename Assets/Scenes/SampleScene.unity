@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAQIew6mJdrXgIAABUFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMziVjCIHQWwuE9EBgQju5+CKkNdYgSx5J5nP4713JNnbdE8vb3bdvP+QbEcrmwJw2SyP4SnMg33vE2+Rbr3G+w5nutdqKK9QxX4K71AfREPNJndCID3ya1Rk4I9gPtZc+OEKwUCLRJlvwPcy0dRbhhEoL6DLa+WyF0K1HzvjTn/qUC1rDibeuaE2j3h1NBsqBaUKjp5cqtA7sv4TAQjFJsxy4V93ED2vmQcmnsJ8qwmtnWkphKzHEXfLQ7DZPwYDvlguKvQUBgyefkILYp84Tt7PXSWLBVaIMvcyFwSGVtOSnLieXUXsohR2pLHyh8ShoKjlX/7n7g+BOjM7e67KDyJdwqWCHT3ph1LrWZNvwvKU8jOdE5YHuJHyloD700uhCcXQ6U/jUwsJw3vx9dDZLgR0avJTaAYu8tZ/udrCHe2j+PJMi24UVjkpgK3WYd9g+GNzMLxQcbsNWFIh6FX8s/Kb79hFVjjdhrENX1aXy8na6MD6ULMLMfDeFm2mjIMCV6BwUle6yQRrX3WDH1yrb8bxR/1yq4pWvfgWdlAA38VHUcW306bEsm+rTCmy6LpwUChrR3vGBc5pppcoDa8+kTtsWJqGslbYvBP/3tMhzAkDZONq9TmCccNofDKPdcDQd8ekze2WTKQm3JxT2SeWmFFqNB7emGnKFd1Z/RXpLQ/Nw7NzQ01JcM90auVCJ3jIDoNYlw0M4GCyCr5IvuMABbcE5ocK+yS0mUrMD8PhBFIdOF2dnaNywxCQXR+08EpNZ+GzExMOPW94YOAo4+eI12Z3c/wJQSwMEFAAACAgAABAh7HCVui9tAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJJxWmpqYrKZQZKFeapZWkqirqGRQZKRiaVJiqVxskWyuaVSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAABAh7DqYl2teAgAAFQUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAABAh7HCVui9tAAAAeAAAAAkAJAAAAAAAAAAAAAAAqwIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABjAwAAAAA=
+    dataString: UEsDBBQAAAgIAAAQIey7cm0bbQIAACEFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoUxXwH31gIhPSQwoZ1cfBHSGmuQJY8k85EM/70r2cYuPUV5+3b37ds1X0QoWwBz2qyN4K+aA/neI/5NvvXa4Atc6EGrnfiEhvMhuMs8iQbOO3VCIz70aVbn4IxgP9RBenKEYKlEqk2+4gdYaOsswimVFjBktPPZCqGvHrngn37sU674Gs386xNfcdS74ZOBcmBaajSY1tSG2J8GYqmYpHkB3Ktu+aOm8jywFI5TE7x0pqUUttZC3LUIs+6KDAz4YbmgOFroHw1iBDIQh8z5ut3sTZpacLUmQ69LYdCjqiz5qSvjcmqPla4TlaVv9DQJmqqar/+F+8MQTo3OX5q2w8i3cJlgx3d6ZdS6jrFdeNkqHwZ3zlQe6V7CRwbqTa+NLhXHoDOlTy0tjJbtv/fJFhmwY4tXUh/Asuisp9njYDyfDOfTWbzqR7NmUzjQLThxWUiR74OrkwrYSR3MD5cABtf0C9WHO7F1XUS9pD8WftND96DqwLMw1mGoHll5rXtdGk8lq2CgH610C20UBLieoABFpbtusYx7XOdDrNP2IfJM/adTN69jzRfxkBLglh9FD6GtPt83ZzN9fgWbbUonhYJWtA+8oU8LrVR1bV1PmrRdaVLKOmmHUvB/74yMUwDKnqL9fAZPKaf94SjajybxhMdjNmezmIRDFArnpHJbCa3twa2ptrjCo2t+UXprQ4tw+dzQ81p85rpjuVCp3jEDoDZVhbtwMNgEP1G+4gIN2oFzQoV9k6+ESM2OwJN7oSRMuro4Q5O2SkIKcdLOIwlZhJ+QhHj4fthbAycBZ9+8KXYjt79QSwMEFAAACAgAABAh7HCVui9tAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJJxWmpqYrKZQZKFeapZWkqirqGRQZKRiaVJiqVxskWyuaVSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAABAh7LtybRttAgAAIQUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAABAh7HCVui9tAAAAeAAAAAkAJAAAAAAAAAAAAAAAugIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAAByAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -1564,6 +1564,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1475317838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1475317839}
+  m_Layer: 0
+  m_Name: DummyTarget
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1475317839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475317838}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.18, y: 1.39, z: 0.03807387}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2036319284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,7 +1609,7 @@ GameObject:
   - component: {fileID: 2036319288}
   m_Layer: 6
   m_Name: WallTiles
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
