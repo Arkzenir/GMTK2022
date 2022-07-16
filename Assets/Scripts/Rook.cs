@@ -5,8 +5,9 @@ using UnityEngine;
 public class Rook : Enemy
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         health = 120;
         moveSpeed = 2;
         damage = 20;

@@ -5,8 +5,9 @@ using UnityEngine;
 public class Knight : Enemy
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         health = 60;
         moveSpeed = 7;
         damage = 20;
