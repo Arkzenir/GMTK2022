@@ -6,14 +6,17 @@ using Pathfinding;
 public class Enemy : MonoBehaviour
 {
     public int health = 1;
-    public int moveSpeed = 1;
+    public float moveSpeed = 1;
     public int damage = 0;
     public AIState state;
-
-    public float detectRange = 7f;
-    public float visionRange = 4f;
-    public int pathRefreshFrameDelay = 60;
+    
+    
+    public float detectRange = 9f;
+    public float attackInitiateRange = 1f;
+    
+    public int pathRefreshFrameDelay = 8;
     private int pathRefreshCount;
+
     public Transform target;
     public LayerMask wallLayer;
     private float nextWaypointDist = 0.05f;
@@ -22,7 +25,7 @@ public class Enemy : MonoBehaviour
     private int currentWaypoint = 0;
     private bool reachedEndOfPath = false;
     private Seeker seeker;
-    private Rigidbody2D rb;
+    
     public enum AIState
     {
         Idle,
@@ -40,16 +43,16 @@ public class Enemy : MonoBehaviour
         target = GameObject.FindWithTag("Player").GetComponent<Transform>();
         wallLayer = LayerMask.NameToLayer("Wall");
         seeker = GetComponent<Seeker>();
-        rb = GetComponent<Rigidbody2D>();
         seeker.StartPath(transform.position, target.position, OnPathComplete);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        
+        if(state == AIState.Dead)
+            return;
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if(state == AIState.Dead)
             return;
@@ -69,12 +72,15 @@ public class Enemy : MonoBehaviour
 
     private void UpdatePath()
     {
-        seeker.StartPath(transform.position, target.position, OnPathComplete);
-        
+        if (path.IsDone())
+        {
+            seeker.StartPath(transform.position, target.position, OnPathComplete);
+        }
     }
     
     private void FollowPath()
     {
+        float spd = moveSpeed;
         if (path == null)
             return;
         if (currentWaypoint >= path.vectorPath.Count)
@@ -87,12 +93,11 @@ public class Enemy : MonoBehaviour
             reachedEndOfPath = false;
         }
 
-        if (state == AIState.MoveTowardsPlayer)
+        if (state == AIState.MoveTowardsPlayer )
         {
             Vector2 direction = ((Vector2) path.vectorPath[currentWaypoint] - (Vector2) transform.position).normalized;
-            transform.Translate(direction * Time.deltaTime * moveSpeed, Space.World);
-            //rb.MovePosition((Vector2)transform.position + direction * Time.deltaTime * moveSpeed);
-
+            transform.Translate(direction * Time.deltaTime * spd, Space.World);
+            
             float distance = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
             if (distance < nextWaypointDist)
                 currentWaypoint++;
@@ -106,29 +111,36 @@ public class Enemy : MonoBehaviour
         else
             return true;
     }
-
+    private void PerformAttack()
+    {
+        
+    }
     private void SetAggro()
     {
         if (TargetDetected())
         {
-            RaycastHit2D hitInfo;
-            hitInfo = Physics2D.Raycast(transform.position, (target.position - transform.position), visionRange);
-            if (hitInfo.collider == null || !hitInfo.collider.gameObject.CompareTag("Wall"))
+            if (pathRefreshCount > 0)
             {
-                Debug.DrawLine(transform.position, target.position, Color.red);
-                state = AIState.MoveTowardsPlayer;
-                if (pathRefreshCount > 0)
-                {
-                    if (pathRefreshCount == pathRefreshFrameDelay)
-                        UpdatePath();
-                    pathRefreshCount--;
-                }
-                else
-                {
-                    Debug.Log("Path Updated");
+                if (pathRefreshCount == pathRefreshFrameDelay)
                     UpdatePath();
-                    pathRefreshCount = pathRefreshFrameDelay;
-                }
+                
+                pathRefreshCount--;
+            }
+            else
+            {
+                pathRefreshCount = pathRefreshFrameDelay;
+            }
+
+            float dist = Vector2.Distance(target.position, transform.position);
+            RaycastHit2D hitInfo;
+            hitInfo = Physics2D.Raycast(transform.position, (target.position - transform.position), dist,~wallLayer);
+            Debug.DrawLine(transform.position, target.position, Color.red);
+            bool seePlayer = false;
+            seePlayer = hitInfo.collider == null || !hitInfo.collider.gameObject.CompareTag("Wall");
+            if (seePlayer)
+            {
+                state = AIState.MoveTowardsPlayer;
+                Debug.DrawLine(transform.position, target.position, Color.blue);
             }
             else
             {
