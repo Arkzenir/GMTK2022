@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     public int maxHealth = 100;
     private int currHealth;
     
+
     private void Start()
     {
         bodyStationarySprites = new List<GameObject>();
@@ -103,6 +104,11 @@ public class Player : MonoBehaviour
         if (inventory.action.WasReleasedThisFrame())
         {
             inventoryController.UseInventory();
+        }
+
+        if (attack.action.WasPressedThisFrame())
+        {
+            weaponRotation.Attack();
         }
         
         PlayerSpriteRoll.SetActive(rolling);

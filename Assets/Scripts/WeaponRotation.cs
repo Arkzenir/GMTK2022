@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponRotation : MonoBehaviour
 {
     public SpriteRenderer characterRenderer, weaponRenderer;
     public Vector2 mousePosition { get; set; }
+    public Animator animator;
+    public float delay = 0.3f;
+    private bool attackBLocked;
+    public bool IsAttacking { get; private set; }
 
     private void Update()
     {
+        if (IsAttacking)
+        {
+            return;
+        }
         Vector2 direction = (mousePosition - (Vector2) transform.position).normalized;
         transform.right = direction;
 
@@ -33,6 +42,35 @@ public class WeaponRotation : MonoBehaviour
         }
 
         
+    }
+
+    public void ResetIsAttacking()
+    {
+        IsAttacking = false;
+    }
+    public void Attack()
+    {
+        if (attackBLocked)
+        {
+            return;
+        }
+        animator.SetTrigger("Attack");
+        IsAttacking = true;
+        attackBLocked = true;
+        StartCoroutine(DelayAttack());
+        StartCoroutine((DelayFollow()));
+    }
+
+    private IEnumerator DelayAttack()
+    {
+        yield return new WaitForSeconds(delay);
+        attackBLocked = false;
+    }
+
+    private IEnumerator DelayFollow()
+    {
+        yield return new WaitForSeconds(0.75f);
+        IsAttacking = false;
     }
 
 }
