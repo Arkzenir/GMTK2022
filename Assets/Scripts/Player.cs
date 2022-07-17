@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = System.Random;
 
 public class Player : MonoBehaviour
 {
@@ -21,9 +22,13 @@ public class Player : MonoBehaviour
 
     private List<GameObject> bodyStationarySprites;
     private List<GameObject> legSprites;
+    private GameObject PlayerBodyParent;
     private GameObject PlayerSpriteRoll;
     private GameObject PlayerSpriteDead;
+
+    private Random rand;
     
+    private int dieFace;
 
     public float invulDuration = 0.5f;
     public float rollDuration = 0.75f;
@@ -51,6 +56,7 @@ public class Player : MonoBehaviour
             legSprites.Add(transform.Find("PlayerLegs").GetChild(i).gameObject);
         }
 
+        PlayerBodyParent = transform.Find("PlayerSpriteStationary").gameObject;
         PlayerSpriteRoll = transform.Find("PlayerSpriteRoll").gameObject;
         PlayerSpriteDead = transform.Find("PlayerSpriteDead").gameObject;
 
@@ -66,8 +72,10 @@ public class Player : MonoBehaviour
         PlayerSpriteDead.SetActive(false);
         PlayerSpriteRoll.SetActive(false);
         legSprites[0].SetActive(true);
-        bodyStationarySprites[0].SetActive(true);
-        
+
+        rand = new Random();
+        dieFace = 0;
+        bodyStationarySprites[dieFace].SetActive(true);
         
         invulCounter = invulDuration;
         rollCounter = rollDuration;
@@ -95,7 +103,10 @@ public class Player : MonoBehaviour
         {
             inventoryController.UseInventory();
         }
-
+        
+        PlayerSpriteRoll.SetActive(rolling);
+        PlayerBodyParent.SetActive(!rolling);
+        
         if (invul)
         {
             if (invulCounter >= 0)
@@ -119,6 +130,8 @@ public class Player : MonoBehaviour
             {
                 rolling = false;
                 rollCounter = rollDuration;
+                dieFace = rand.Next(0, 6);
+                bodyStationarySprites[dieFace].SetActive(true);
             }
         }
 
