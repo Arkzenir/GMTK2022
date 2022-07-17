@@ -16,21 +16,8 @@ public class InventoryPage : MonoBehaviour
             InventoryItem uiItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
             uiItem.transform.SetParent((contentPanel));
             UIItemsList.Add(uiItem);
-            uiItem.OnLMB += HandleItemSelection;
-            uiItem.OnRMB += HandleShowItemActions;
         }
     }
-
-    private void HandleItemSelection(InventoryItem obj)
-    {
-        Debug.Log(obj.name);
-    }
-
-    private void HandleShowItemActions(InventoryItem obj)
-    {
-        Debug.Log(obj.name);
-    }
-
     public void Show()
     {
         gameObject.SetActive(true);

@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
@@ -14,16 +16,16 @@ public class InventoryItem : MonoBehaviour
 
    [SerializeField] private Image borderImage;
 
-   public event Action<InventoryItem> OnLMB, OnRMB;
-
+   public bool mouseOver = false;
    private bool empty = true;
+   private Camera mainCamera;
 
    public void Awake()
    {
+
       ResetData();
       Deselect();
    }
-
    public void ResetData()
    {
       this.itemImage.gameObject.SetActive(false);
@@ -48,17 +50,19 @@ public class InventoryItem : MonoBehaviour
       borderImage.enabled = true;
    }
 
-   public void OnMouseClick(BaseEventData data)
+   private void OnTriggerEnter(Collider mouse)
    {
-      PointerEventData pointerData = (PointerEventData) data;
-      if (pointerData.button == PointerEventData.InputButton.Right)
+      if (mouse.gameObject.tag == "Mouse")
       {
-         OnRMB?.Invoke(this);
-      }
-      else
-      {
-         OnLMB?.Invoke(this);
+         mouseOver = true;
       }
    }
 
+   private void OnTriggerExit(Collider mouse)
+   {
+      if (mouse.gameObject.tag == "Mouse")
+      {
+         mouseOver = false;
+      }
+   }
 }

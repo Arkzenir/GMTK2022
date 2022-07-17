@@ -16,9 +16,10 @@ public class Player : MonoBehaviour
     public Vector2 PointerInput => pointerInput;
 
     [SerializeField] 
-    private InputActionReference movement, attack, pointerPosition, inventory;
+    private InputActionReference movement, attack, pointerPosition, inventory, roll;
 
     private WeaponRotation weaponRotation;
+
 
     private List<GameObject> bodyStationarySprites;
     private List<GameObject> legSprites;
@@ -31,12 +32,12 @@ public class Player : MonoBehaviour
     private int dieFace;
 
     public float invulDuration = 0.5f;
-    public float rollDuration = 0.75f;
+    public float rollDuration = 0.20f;
     private float invulCounter;
     private float rollCounter;
     
     private bool invul;
-    private bool rolling;
+    public bool rolling;
     private bool dead;
 
     public int maxHealth = 100;
@@ -106,6 +107,12 @@ public class Player : MonoBehaviour
         
         PlayerSpriteRoll.SetActive(rolling);
         PlayerBodyParent.SetActive(!rolling);
+        if (roll.action.WasReleasedThisFrame())
+        {
+            playerMovement.direction = playerMovement.Roll(pointerInput);
+            rolling = true;
+            playerMovement.roll = true;
+        }
         
         if (invul)
         {

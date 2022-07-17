@@ -994,8 +994,10 @@ MonoBehaviour:
   attack: {fileID: -5822558228692331582, guid: 6bbc93d2a15f3dd4882df10fb9b62dbc, type: 3}
   pointerPosition: {fileID: -2812300784296243789, guid: 6bbc93d2a15f3dd4882df10fb9b62dbc, type: 3}
   inventory: {fileID: -6046966438808165455, guid: 6bbc93d2a15f3dd4882df10fb9b62dbc, type: 3}
+  roll: {fileID: 0}
   invulDuration: 0.5
-  rollDuration: 0.75
+  rollDuration: 0.15
+  rolling: 0
   maxHealth: 100
 --- !u!50 &4167751276884638490
 Rigidbody2D:
@@ -1032,6 +1034,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RB: {fileID: 0}
   moveSpeed: 10
+  direction: {x: 0, y: 0}
+  transform: {fileID: 4167751276884638485}
+  player: {fileID: 4167751276884638484}
+  roll: 0
+  rollTimerCount: 0
 --- !u!114 &4167751276884638486
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Wall
   - AttackIndicator
+  - Mouse
   layers:
   - Default
   - TransparentFX
