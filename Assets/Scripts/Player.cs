@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,15 +27,18 @@ public class Player : MonoBehaviour
     private GameObject PlayerBodyParent;
     private GameObject PlayerSpriteRoll;
     private GameObject PlayerSpriteDead;
-
+    private PlayerMovement moveScript;
+    
     private Random rand;
     
     private int dieFace;
 
     public float invulDuration = 0.5f;
-    public float rollDuration = 0.20f;
+    public float rollDuration = 0.15f;
+    public float rollCooldown = 0.6f;
     private float invulCounter;
     private float rollCounter;
+    private float rollCooldownCounter;
     
     private bool invul;
     public bool rolling;
@@ -43,7 +47,6 @@ public class Player : MonoBehaviour
     public int maxHealth = 100;
     private int currHealth;
     
-
     private void Start()
     {
         bodyStationarySprites = new List<GameObject>();
@@ -57,10 +60,11 @@ public class Player : MonoBehaviour
         {
             legSprites.Add(transform.Find("PlayerLegs").GetChild(i).gameObject);
         }
-
+        
         PlayerBodyParent = transform.Find("PlayerSpriteStationary").gameObject;
         PlayerSpriteRoll = transform.Find("PlayerSpriteRoll").gameObject;
         PlayerSpriteDead = transform.Find("PlayerSpriteDead").gameObject;
+        moveScript = GetComponent<PlayerMovement>();
 
         foreach (var body in bodyStationarySprites)
         {
@@ -75,12 +79,13 @@ public class Player : MonoBehaviour
         PlayerSpriteRoll.SetActive(false);
         legSprites[0].SetActive(true);
 
-        rand = new Random();
+        rand = new Random((int)DateTime.Now.Ticks); //Randomise seed
         dieFace = 0;
         bodyStationarySprites[dieFace].SetActive(true);
         
         invulCounter = invulDuration;
         rollCounter = rollDuration;
+        rollCooldownCounter = rollCooldown;
         currHealth = maxHealth;
         invul = false;
         rolling = false;
@@ -97,6 +102,16 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (dead)
+        {
+            return;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Die();
+        }
+        transform.rotation = Quaternion.identity;
         pointerInput = GetPointerInput();
         weaponRotation.mousePosition = pointerInput;
         movementInput = movement.action.ReadValue<Vector2>();
@@ -105,11 +120,36 @@ public class Player : MonoBehaviour
         {
             inventoryController.UseInventory();
         }
-
-        if (attack.action.WasPressedThisFrame())
+		
+		if (attack.action.WasPressedThisFrame())
         {
             weaponRotation.Attack();
         }
+
+        if (moveScript.MovementInput.x != 0)
+        {
+            legSprites[1].transform.localScale = new Vector3(moveScript.MovementInput.x,legSprites[1].transform.localScale.y, legSprites[1].transform.localScale.z);
+        }
+
+        if (moveScript.MovementInput.x != 0)
+        {
+            legSprites[0].SetActive(false);
+            legSprites[1].SetActive(true);
+            legSprites[2].SetActive(false);
+        }
+        else if (moveScript.MovementInput.y != 0)
+        {
+            legSprites[0].SetActive(false);
+            legSprites[1].SetActive(false);
+            legSprites[2].SetActive(true);
+        }
+        else if(!dead)
+        {
+            legSprites[0].SetActive(true);
+            legSprites[1].SetActive(false);
+            legSprites[2].SetActive(false);
+        }
+        
         
         PlayerSpriteRoll.SetActive(rolling);
         PlayerBodyParent.SetActive(!rolling);
@@ -132,9 +172,14 @@ public class Player : MonoBehaviour
                 invulCounter = invulDuration;
             }
         }
-        
-        if (rolling)
+
+        if (rolling && rollCooldownCounter <= 0)
         {
+            foreach (var l in legSprites)
+            {
+                l.SetActive(false);
+            }
+
             if (rollCounter >= 0)
             {
                 rollCounter -= Time.deltaTime;
@@ -143,10 +188,17 @@ public class Player : MonoBehaviour
             {
                 rolling = false;
                 rollCounter = rollDuration;
+                rollCooldownCounter = rollCooldown;
                 dieFace = rand.Next(0, 6);
+                foreach (var face in bodyStationarySprites)
+                {
+                    face.SetActive(false);
+                }
                 bodyStationarySprites[dieFace].SetActive(true);
             }
         }
+        else if(rollCooldownCounter > 0)
+            rollCooldownCounter -= Time.deltaTime;
 
     }
 
@@ -157,6 +209,24 @@ public class Player : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePos);
     }
 
+    public void Die()
+    {
+        currHealth = 0;
+        dead = true;
+            
+        foreach (var body in bodyStationarySprites)
+        {
+            body.SetActive(false);
+        }
+
+        foreach (var legs in legSprites)
+        {
+            legs.SetActive(false);
+        }
+        PlayerSpriteRoll.SetActive(false);
+        PlayerSpriteDead.SetActive(true);
+        weaponRotation.transform.GetChild(0).gameObject.SetActive(false);
+    }
     public void TakeDamage(int val)
     {
         if (rolling || invul)
@@ -167,8 +237,7 @@ public class Player : MonoBehaviour
             invul = true;
         }
         else {
-            currHealth = 0;
-            dead = true;
+            Die();
         }
     }
 }

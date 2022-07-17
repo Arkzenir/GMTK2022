@@ -6,11 +6,17 @@ using UnityEngine.SceneManagement;
 public class NextArea : MonoBehaviour
 {
     // Start is called before the first frame update
+    public float minInteractDistance;
+    
     private List<GameObject> rootObjects;
     private List<Enemy> enemies;
     private GameObject prompt;
+    private Transform playerTransform;
+    private float distanceToPlayer;
     void Start()
     {
+        playerTransform = GameObject.FindWithTag("Player").transform;
+        distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
         prompt = transform.Find("PromptGraphics").gameObject;
         prompt.SetActive(false);
         rootObjects = new List<GameObject>();
@@ -30,11 +36,18 @@ public class NextArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        if (distanceToPlayer <= minInteractDistance && AllDead())
         {
             prompt.SetActive(AllDead());
-            Debug.Log("All dead: " + AllDead());
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            if (SceneManager.sceneCountInBuildSettings > nextSceneIndex && Input.GetKeyDown(KeyCode.E))
+            {
+                SceneManager.LoadScene(nextSceneIndex);
+            }
         }
+        
+        
         
     }
 
