@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 2112414550654639401}
   - component: {fileID: 2112414550654639397}
   - component: {fileID: 2112414550654639398}
-  - component: {fileID: 1606980332617806598}
   - component: {fileID: 3130686036227892726}
   - component: {fileID: -7326646855013236077}
   m_Layer: 0
@@ -163,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5f6eb89386fac4ab704fcd284cabc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  maxHealth: 1
   moveSpeed: 2
   damage: 15
   state: 0
@@ -176,27 +175,6 @@ MonoBehaviour:
     m_Bits: 0
   attackRange: 1.5
   attackLinger: 0.2
---- !u!50 &1606980332617806598
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2112414550654639400}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &3130686036227892726
 BoxCollider2D:
   m_ObjectHideFlags: 0

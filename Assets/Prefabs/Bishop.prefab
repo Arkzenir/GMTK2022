@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3837814898638887265}
   - component: {fileID: 3371434554204330610}
   - component: {fileID: 3565592845579077535}
-  - component: {fileID: 6677353556233203064}
   m_Layer: 0
   m_Name: Bishop
   m_TagString: Enemy
@@ -77,14 +76,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea01c6e11901f048940728eb8b7dcc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  maxHealth: 1
   moveSpeed: 1
   damage: 0
   state: 0
   detectRange: 9
   attackInitiateRange: 1
   attackCooldown: 0.8
-  pathRefreshFrameDelay: 15
   target: {fileID: 0}
   wallLayer:
     serializedVersion: 2
@@ -115,27 +113,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
---- !u!50 &6677353556233203064
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561761670225762633}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &2606788043811951780
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class Pawn : Enemy
     protected override void Start()
     {
         base.Start();
-        health = 50;
+        maxHealth = 50;
         moveSpeed = 2;
         damage = 15;
         attackCooldown = 0.8f;
@@ -39,7 +39,7 @@ public class Pawn : Enemy
                 disregardPath = true;
                 if (distanceToTarget <= attackRange)
                 {
-                    //Deal damage to enemy once
+                    damageable.TakeDamage(damage);
                     pawnAttack.gameObject.SetActive(true);
                 }
                 attackLingerCount -= Time.deltaTime;

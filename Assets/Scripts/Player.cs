@@ -19,6 +19,27 @@ public class Player : MonoBehaviour
 
     private WeaponRotation weaponRotation;
 
+    public float invulDuration = 0.5f;
+    public float rollDuration = 0.75f;
+    private float invulCounter;
+    private float rollCounter;
+    
+    private bool invul;
+    private bool rolling;
+    private bool dead;
+
+    public int maxHealth = 100;
+    private int currHealth;
+    
+    private void Start()
+    {
+        invulCounter = invulDuration;
+        rollCounter = rollDuration;
+        currHealth = maxHealth;
+        invul = false;
+        rolling = false;
+        dead = false;
+    }
 
     private void Awake()
     {
@@ -39,6 +60,32 @@ public class Player : MonoBehaviour
             inventoryController.UseInventory();
         }
 
+        if (invul)
+        {
+            if (invulCounter >= 0)
+            {
+                invulCounter -= Time.deltaTime;
+            }
+            else
+            {
+                invul = false;
+                invulCounter = invulDuration;
+            }
+        }
+        
+        if (rolling)
+        {
+            if (rollCounter >= 0)
+            {
+                rollCounter -= Time.deltaTime;
+            }
+            else
+            {
+                rolling = false;
+                rollCounter = rollDuration;
+            }
+        }
+
     }
 
     private Vector2 GetPointerInput()
@@ -46,5 +93,20 @@ public class Player : MonoBehaviour
         Vector3 mousePos = pointerPosition.action.ReadValue<Vector2>();
         mousePos.z = Camera.main.nearClipPlane;
         return Camera.main.ScreenToWorldPoint(mousePos);
+    }
+
+    public void TakeDamage(int val)
+    {
+        if (rolling || invul)
+            return;
+
+        if (currHealth > 0 || !dead || currHealth - val > 0) {
+            currHealth = currHealth - val;
+            invul = true;
+        }
+        else {
+            currHealth = 0;
+            dead = true;
+        }
     }
 }

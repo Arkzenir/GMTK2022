@@ -128,7 +128,6 @@ GameObject:
   - component: {fileID: 3677521102210414385}
   - component: {fileID: 8674088881072182157}
   - component: {fileID: 2540504980305433118}
-  - component: {fileID: 2086801554497081394}
   - component: {fileID: 6706978615191168457}
   m_Layer: 0
   m_Name: Rook
@@ -195,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec3d5d43e6d15c84b8709c975a71ac39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 120
+  maxHealth: 1
   moveSpeed: 1
   damage: 20
   state: 0
@@ -207,6 +206,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   attackRange: 4
+  hitboxSize: 0.4
   attackLinger: 0.4
 --- !u!61 &2540504980305433118
 BoxCollider2D:
@@ -234,27 +234,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.8}
   m_EdgeRadius: 0
---- !u!50 &2086801554497081394
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822571857700722709}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &6706978615191168457
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class Bishop : Enemy
     protected override void Start()
     {
         base.Start();
-        health = 30;
+        maxHealth = 30;
         moveSpeed = 7;
         damage = 50;
     }

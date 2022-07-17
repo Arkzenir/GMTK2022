@@ -8,7 +8,7 @@ public class Knight : Enemy
     protected override void Start()
     {
         base.Start();
-        health = 60;
+        maxHealth = 60;
         moveSpeed = 7;
         damage = 20;
     }

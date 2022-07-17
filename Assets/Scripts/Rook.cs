@@ -14,13 +14,14 @@ public class Rook : Enemy
     private Vector2 dashTarget;
     
     public float attackRange = 4f;
+    public float hitboxSize = 0.4f;
     public float attackLinger;
     private float attackLingerCount;
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        health = 120;
+        maxHealth = 120;
         moveSpeed = 2;
         damage = 20;
         targetLocked = false;
@@ -95,10 +96,10 @@ public class Rook : Enemy
         {
             Vector2 dir = (pos - (Vector2) transform.position).normalized;
             transform.Translate(dir * Time.deltaTime * spd);
-        }
-        else
-        {
-            
+            if (distanceToTarget <= hitboxSize)
+            {
+                damageable.TakeDamage(damage);
+            }
         }
     }
 }

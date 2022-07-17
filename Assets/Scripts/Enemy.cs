@@ -5,7 +5,8 @@ using UnityEngine;
 using Pathfinding;
 public class Enemy : MonoBehaviour
 {
-    public int health = 1;
+    public int maxHealth = 1;
+    private int currHealth;
     public float moveSpeed = 1;
     public int damage = 0;
     public AIState state;
@@ -26,6 +27,7 @@ public class Enemy : MonoBehaviour
 
     
     public Transform target;
+    protected Player damageable;
     public LayerMask wallLayer;
     private float nextWaypointDist = 0.05f;
 
@@ -46,9 +48,11 @@ public class Enemy : MonoBehaviour
     {
         seePlayer = false;
         attacking = false;
+        currHealth = maxHealth;
         attackCount = attackCooldown;
         pathRefreshCount = pathRefreshFrameDelay;
         target = GameObject.FindWithTag("Player").transform;
+        damageable = target.GetComponent<Player>();
         distanceToTarget = Vector2.Distance(transform.position, target.position);
         state = AIState.Idle;
         Debug.Log("before target");
@@ -170,14 +174,14 @@ public class Enemy : MonoBehaviour
     
     public int TakeDamage(int val)
     {
-        if (health > 0 || state != AIState.Dead || health - val > 0) {
-            health = health - val;
+        if (currHealth > 0 || state != AIState.Dead || currHealth - val > 0) {
+            currHealth = currHealth - val;
         }
         else {
-            health = 0;
+            currHealth = 0;
             Die();
         }
-        return health;
+        return currHealth;
     }
 
     private void Die()
