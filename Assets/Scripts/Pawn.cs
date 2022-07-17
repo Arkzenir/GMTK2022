@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Pawn : Enemy
@@ -46,7 +47,7 @@ public class Pawn : Enemy
                 disregardPath = true;
                 if (distanceToTarget <= attackRange)
                 {
-                    //damageable.TakeDamage(damage);
+                    damageable.TakeDamage(damage);
                     pawnAttack.gameObject.SetActive(true);
                 }
                 attackLingerCount -= Time.deltaTime;

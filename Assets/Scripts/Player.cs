@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 public class Player : MonoBehaviour
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
     private bool dead;
 
     public int maxHealth = 100;
-    private int currHealth;
+    public int currHealth;
     
     private void Start()
     {
@@ -112,7 +113,11 @@ public class Player : MonoBehaviour
             Die();
         }
 #endif
-        
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
         transform.rotation = Quaternion.identity;
         pointerInput = GetPointerInput();
         weaponRotation.mousePosition = pointerInput;
@@ -234,7 +239,7 @@ public class Player : MonoBehaviour
         if (rolling || invul)
             return;
 
-        if (currHealth > 0 || !dead || currHealth - val > 0) {
+        if (currHealth > 0 && !dead && currHealth - val > 0) {
             currHealth = currHealth - val;
             invul = true;
         }

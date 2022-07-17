@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,7 +11,14 @@ public class WeaponRotation : MonoBehaviour
     public Animator animator;
     public float delay = 0.3f;
     private bool attackBLocked;
+    [SerializeField] Collider2D collider;
+    public int damageVal = 20;
     public bool IsAttacking { get; private set; }
+
+    private void Start()
+    {
+        collider.enabled = false;
+    }
 
     private void Update()
     {
@@ -57,6 +65,7 @@ public class WeaponRotation : MonoBehaviour
         animator.SetTrigger("Attack");
         IsAttacking = true;
         attackBLocked = true;
+        collider.enabled = true;
         StartCoroutine(DelayAttack());
         StartCoroutine((DelayFollow()));
     }
@@ -71,6 +80,7 @@ public class WeaponRotation : MonoBehaviour
     {
         yield return new WaitForSeconds(0.75f);
         IsAttacking = false;
+        collider.enabled = false;
     }
 
 }

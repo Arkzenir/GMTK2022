@@ -6,7 +6,7 @@ using Pathfinding;
 public class Enemy : MonoBehaviour
 {
     public int maxHealth = 1;
-    private int currHealth;
+    public int currHealth;
     public float moveSpeed = 1;
     public int damage = 0;
     public AIState state;
@@ -181,7 +181,7 @@ public class Enemy : MonoBehaviour
     
     public int TakeDamage(int val)
     {
-        if (currHealth > 0 || state != AIState.Dead || currHealth - val > 0) {
+        if (currHealth > 0 && state != AIState.Dead) {
             currHealth = currHealth - val;
         }
         else {
@@ -194,5 +194,15 @@ public class Enemy : MonoBehaviour
     virtual public void Die()
     {
         state = AIState.Dead;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collider)
+    {
+        
+        if (collider.gameObject.CompareTag("Sword"))
+        {
+            Debug.Log("cum");
+            TakeDamage(15);
+        }
     }
 }
