@@ -37,9 +37,9 @@ public class NextArea : MonoBehaviour
     void Update()
     {
         distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        if (distanceToPlayer <= minInteractDistance && AllDead())
+        if (distanceToPlayer <= minInteractDistance && AllDead() || enemies.Count == 0)
         {
-            prompt.SetActive(AllDead());
+            prompt.SetActive(AllDead() || enemies.Count == 0);
             int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
             if (SceneManager.sceneCountInBuildSettings > nextSceneIndex && Input.GetKeyDown(KeyCode.E))
             {

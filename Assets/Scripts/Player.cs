@@ -106,11 +106,13 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.K))
         {
             Die();
         }
+#endif
+        
         transform.rotation = Quaternion.identity;
         pointerInput = GetPointerInput();
         weaponRotation.mousePosition = pointerInput;

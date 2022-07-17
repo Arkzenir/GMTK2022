@@ -29,6 +29,13 @@ public class Pawn : Enemy
     protected override void Update()
     {
         base.Update();
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        if (state == AIState.Dead)
+            return;
         attackIndicator.SetActive(attacking);
         if (distanceToTarget <= attackInitiateRange && seePlayer)
         {
@@ -56,4 +63,12 @@ public class Pawn : Enemy
             attacking = false;
     }
     
+    public override void Die()
+    {
+        base.Die();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+    }
 }

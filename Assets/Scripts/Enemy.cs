@@ -67,6 +67,13 @@ public class Enemy : MonoBehaviour
         if(state == AIState.Dead)
             return;
         distanceToTarget = Vector2.Distance(transform.position, target.position);
+        
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Die();
+        }
+#endif
     }
 
     protected virtual void FixedUpdate()
@@ -184,7 +191,7 @@ public class Enemy : MonoBehaviour
         return currHealth;
     }
 
-    private void Die()
+    virtual public void Die()
     {
         state = AIState.Dead;
     }

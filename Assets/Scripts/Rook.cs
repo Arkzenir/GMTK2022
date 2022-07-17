@@ -34,11 +34,20 @@ public class Rook : Enemy
         dashDirection.gameObject.SetActive(false);
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     // Update is called once per frame
     protected override void FixedUpdate()
     {
         disregardPath = attacking;
+        
         base.FixedUpdate();
+        if (state == AIState.Dead)
+            return;
+        
         attackIndicator.SetActive(attacking);
         if (distanceToTarget <= attackInitiateRange && seePlayer)
         {
@@ -100,6 +109,15 @@ public class Rook : Enemy
             {
                 //damageable.TakeDamage(damage);
             }
+        }
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 }
