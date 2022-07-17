@@ -98,7 +98,7 @@ public class Rook : Enemy
             transform.Translate(dir * Time.deltaTime * spd);
             if (distanceToTarget <= hitboxSize)
             {
-                damageable.TakeDamage(damage);
+                //damageable.TakeDamage(damage);
             }
         }
     }

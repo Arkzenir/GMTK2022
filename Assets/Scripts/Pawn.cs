@@ -39,7 +39,7 @@ public class Pawn : Enemy
                 disregardPath = true;
                 if (distanceToTarget <= attackRange)
                 {
-                    damageable.TakeDamage(damage);
+                    //damageable.TakeDamage(damage);
                     pawnAttack.gameObject.SetActive(true);
                 }
                 attackLingerCount -= Time.deltaTime;

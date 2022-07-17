@@ -19,6 +19,12 @@ public class Player : MonoBehaviour
 
     private WeaponRotation weaponRotation;
 
+    private List<GameObject> bodyStationarySprites;
+    private List<GameObject> legSprites;
+    private GameObject PlayerSpriteRoll;
+    private GameObject PlayerSpriteDead;
+    
+
     public float invulDuration = 0.5f;
     public float rollDuration = 0.75f;
     private float invulCounter;
@@ -33,6 +39,36 @@ public class Player : MonoBehaviour
     
     private void Start()
     {
+        bodyStationarySprites = new List<GameObject>();
+        legSprites = new List<GameObject>();
+        for (int i = 0; i < transform.Find("PlayerSpriteStationary").childCount; i++)
+        {
+            bodyStationarySprites.Add(transform.Find("PlayerSpriteStationary").GetChild(i).gameObject);
+        }
+        // 0 = Idle, 1 = Horizontal, 2 = Vertical
+        for (int i = 0; i < transform.Find("PlayerLegs").childCount; i++)
+        {
+            legSprites.Add(transform.Find("PlayerLegs").GetChild(i).gameObject);
+        }
+
+        PlayerSpriteRoll = transform.Find("PlayerSpriteRoll").gameObject;
+        PlayerSpriteDead = transform.Find("PlayerSpriteDead").gameObject;
+
+        foreach (var body in bodyStationarySprites)
+        {
+            body.SetActive(false);
+        }
+
+        foreach (var legs in legSprites)
+        {
+            legs.SetActive(false);
+        }
+        PlayerSpriteDead.SetActive(false);
+        PlayerSpriteRoll.SetActive(false);
+        legSprites[0].SetActive(true);
+        bodyStationarySprites[0].SetActive(true);
+        
+        
         invulCounter = invulDuration;
         rollCounter = rollDuration;
         currHealth = maxHealth;
