@@ -21,8 +21,8 @@ public class Enemy : MonoBehaviour
     protected bool disregardPath;
     protected float distanceToTarget;
     
-    public int pathRefreshFrameDelay = 8;
-    private int pathRefreshCount;
+    protected float pathRefreshFrameDelay = 0.25f;
+    private float pathRefreshCount;
 
     
     public Transform target;
@@ -129,7 +129,7 @@ public class Enemy : MonoBehaviour
             RaycastHit2D hitInfo;
             hitInfo = Physics2D.Raycast(transform.position, (target.position - transform.position), distanceToTarget,~wallLayer);
             Debug.DrawLine(transform.position, target.position, Color.red);
-            seePlayer = hitInfo.collider == null || !hitInfo.collider.gameObject.CompareTag("Wall");
+            seePlayer = (hitInfo.collider == null || !hitInfo.collider.gameObject.CompareTag("Wall"));
             return seePlayer;
         }
     }
@@ -152,7 +152,7 @@ public class Enemy : MonoBehaviour
                 if (pathRefreshCount == pathRefreshFrameDelay)
                     UpdatePath();
                 
-                pathRefreshCount--;
+                pathRefreshCount -= Time.deltaTime;
             }
             else
             {

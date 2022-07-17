@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class Rook : Enemy
 {
-    private float TOLERANCE = 0.01f;
+    //private float TOLERANCE = 0.01f;
     
     private GameObject attackIndicator;
     private GameObject dashDirection;
+
+    private bool targetLocked;
+    private Vector2 dashTarget;
     
     public float attackRange = 4f;
     public float attackLinger;
@@ -20,10 +23,9 @@ public class Rook : Enemy
         health = 120;
         moveSpeed = 2;
         damage = 20;
-        attackInitiateRange = 3f;
-        attackLinger = 0.4f;
-        attackCooldown = 1f;
-
+        targetLocked = false;
+        attacking = false;
+        
         attackLingerCount = attackLinger;
         attackIndicator = transform.Find("AttackIndicator").gameObject;
         dashDirection = transform.Find("DashDirection").gameObject;
@@ -35,19 +37,55 @@ public class Rook : Enemy
     protected override void FixedUpdate()
     {
         disregardPath = attacking;
-        base.Update();
+        base.FixedUpdate();
         attackIndicator.SetActive(attacking);
-        
         if (distanceToTarget <= attackInitiateRange && seePlayer)
         {
-            attacking = true;
+            if (!targetLocked)
+            {
+                RaycastHit2D hitInfo;
+                hitInfo = Physics2D.Raycast(transform.position, (target.position - transform.position), attackRange,~wallLayer);
+                Debug.DrawLine(transform.position, target.position, Color.magenta);
+                if (hitInfo.collider == null)
+                {
+                    dashTarget = transform.position + ((target.position - transform.position).normalized) * attackRange;
+                }
+                else
+                {
+                    dashTarget = hitInfo.point;
+                }
+                dashDirection.transform.right = (Vector3)dashTarget - transform.position;
+                targetLocked = true;
+                attacking = true;
+            }
             dashDirection.gameObject.SetActive(true);
             attackLingerCount -= Time.deltaTime;
             if (attackLingerCount <= 0)
             {
                 dashDirection.gameObject.SetActive(false);
-                //DashToPosition();
+                DashToPosition(moveSpeed * 3, dashTarget);
             }
+        }
+        
+        if (attackLingerCount <= 0)
+        {
+            attackCount -= Time.deltaTime;
+            if (attackCount <= 0)
+            {
+                attackLingerCount = attackLinger;
+                attackCount = attackCooldown;
+                attacking = false;
+                targetLocked = false;
+            }
+        }
+
+        if (attackLingerCount > 0 && (distanceToTarget > attackInitiateRange || !seePlayer))
+        {
+            dashDirection.gameObject.SetActive(false);
+            attackLingerCount = attackLinger;
+            attackCount = attackCooldown;
+            attacking = false;
+            targetLocked = false;
         }
     }
 
@@ -60,13 +98,7 @@ public class Rook : Enemy
         }
         else
         {
-            attackCount -= Time.deltaTime;
-            if (attackCount <= 0)
-            {
-                attackLingerCount = attackLinger;
-                attackCount = attackCooldown;
-                attacking = false;
-            }
+            
         }
     }
 }

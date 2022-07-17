@@ -163,21 +163,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5f6eb89386fac4ab704fcd284cabc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  moveSpeed: 0
-  damage: 0
+  health: 50
+  moveSpeed: 2
+  damage: 15
   state: 0
-  detectRange: 9
+  detectRange: 7
   attackInitiateRange: 1
-  attackCooldown: 1
-  pathRefreshFrameDelay: 60
+  attackCooldown: 0.8
   target: {fileID: 0}
   wallLayer:
     serializedVersion: 2
     m_Bits: 0
-  pawnAttack: {fileID: 7189959012222508979}
   attackRange: 1.5
-  attackLinger: 0
+  attackLinger: 0.2
 --- !u!50 &1606980332617806598
 Rigidbody2D:
   serializedVersion: 4

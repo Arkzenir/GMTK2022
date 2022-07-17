@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6677353556233203064}
   m_Layer: 0
   m_Name: Bishop
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,6 +83,7 @@ MonoBehaviour:
   state: 0
   detectRange: 9
   attackInitiateRange: 1
+  attackCooldown: 0.8
   pathRefreshFrameDelay: 15
   target: {fileID: 0}
   wallLayer:

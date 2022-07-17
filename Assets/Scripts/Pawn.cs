@@ -8,7 +8,7 @@ public class Pawn : Enemy
     private GameObject pawnAttack;
     
     public float attackRange = 1.5f;
-    public float attackLinger;
+    public float attackLinger = 0.2f;
     private float attackLingerCount;
     // Start is called before the first frame update
     protected override void Start()
@@ -17,10 +17,8 @@ public class Pawn : Enemy
         health = 50;
         moveSpeed = 2;
         damage = 15;
-        attackLinger = 0.2f;
         attackCooldown = 0.8f;
-        attackInitiateRange = 0.8f;
-        
+
         attackLingerCount = attackLinger;
         attackIndicator = transform.Find("AttackIndicator").gameObject;
         pawnAttack = transform.Find("PawnAttack").gameObject;
