@@ -27,11 +27,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         stepSize = 1f;
-        if (MovementInput.x != 0 && MovementInput.y != 0)
-        {
-            stepSize = stepSize / MathF.Sqrt(2);
-        }
-
         if (!player.rolling)
         {
             RB.MovePosition(RB.position + (MovementInput * (stepSize * moveSpeed * Time.deltaTime)));
